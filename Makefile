@@ -16,3 +16,8 @@ up:
 down:
 	docker-compose down
 
+build-riemann:
+	docker-compose build riemann
+
+build-producer:
+	docker-compose build producer
