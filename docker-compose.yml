@@ -1,0 +1,53 @@
+version: "3"
+services:
+  kafka:
+    image: spotify/kafka
+    container_name: kafka
+    expose:
+      - "2181"
+      - "9092"
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+  grafana_graphite:
+    image: kamon/grafana_graphite
+    container_name: kamon-grafana-dashboard
+    expose:
+      - "8080"
+      - "8081"
+      - "8125"
+      - "8126"
+      - "2003"
+    ports:
+      - '8080:80'
+      - '8081:81'
+      - '8125:8125/udp'
+      - '8126:8126'
+      - '2003:2003'
+    volumes:
+      - ./data/whisper:/opt/graphite/storage/whisper
+      - ./data/grafana:/opt/grafana/data
+      - ./log/graphite:/opt/graphite/storage/log
+  riemann:
+    build:
+      context: ./riemann
+    container_name: riemann
+    depends_on:
+      - kafka
+      - grafana_graphite
+    links:
+      - kafka
+      - grafana_graphite
+    volumes:
+      - ./log/riemann/riemann.log:/var/log/riemann/riemann.log
+
+  producer:
+    build:
+      context: ./event-producer
+    depends_on:
+      - kafka
+      - riemann
+    links:
+      - kafka
+      - riemann
+
