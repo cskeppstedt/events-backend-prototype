@@ -1,4 +1,4 @@
-all: up
+all: topic up
 
 topic:
 	docker-compose run --rm --service-ports make-topic sh ./bin/kafka-topics.sh \
@@ -9,7 +9,7 @@ topic:
 	docker-compose down
 
 up:
-	docker-compose up ; docker-compose down
+	docker-compose up --build ; docker-compose down
 
 down:
 	docker-compose down
@@ -19,3 +19,4 @@ build-riemann:
 
 build-producer:
 	docker-compose build producer
+
