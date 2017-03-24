@@ -1,13 +1,11 @@
+all: up
+
 topic:
-	docker-compose run --service-ports -d kafka
-	sleep 5
-	./kafka_2.10-0.10.1.0/bin/kafka-topics.sh \
+	docker-compose run --rm --service-ports make-topic sh ./bin/kafka-topics.sh \
 		--create \
-		--zookeeper 0.0.0.0:2181 \
+		--zookeeper kafka:2181 \
 		--replication-factor 1 --partitions 1 \
-		--topic events ; echo "Listing all topics:" ; ./kafka_2.10-0.10.1.0/bin/kafka-topics.sh \
-			--list \
-			--zookeeper 0.0.0.0:2181
+		--topic events
 	docker-compose down
 
 up:

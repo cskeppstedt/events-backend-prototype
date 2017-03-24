@@ -9,6 +9,7 @@ services:
     ports:
       - "2181:2181"
       - "9092:9092"
+
   grafana_graphite:
     image: kamon/grafana_graphite
     container_name: kamon-grafana-dashboard
@@ -28,6 +29,7 @@ services:
       - ./data/whisper:/opt/graphite/storage/whisper
       - ./data/grafana:/opt/grafana/data
       - ./log/graphite:/opt/graphite/storage/log
+
   riemann:
     build:
       context: ./riemann
@@ -44,6 +46,16 @@ services:
   producer:
     build:
       context: ./event-producer
+    container_name: producer
+    depends_on:
+      - kafka
+    links:
+      - kafka
+
+  make-topic:
+    build:
+      context: ./make-topic
+    container_name: make-topic
     depends_on:
       - kafka
     links:
