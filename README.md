@@ -24,8 +24,4 @@ output of the containers.
 ### Recompile after changing source code
 
 `riemann` and `producer` are built from source, so any changes to their source
-files requires a new build. E.g.:
-
-    make build-riemann
-    make build-producer
-
+files requires a new build. This is done automatically as part of `make up`.
