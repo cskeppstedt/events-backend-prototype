@@ -46,8 +46,6 @@ services:
       context: ./event-producer
     depends_on:
       - kafka
-      - riemann
     links:
       - kafka
-      - riemann
 
