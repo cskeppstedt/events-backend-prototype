@@ -8,6 +8,12 @@ topic:
 		--topic events
 	docker-compose down
 
+list-topic:
+	docker-compose run --rm --service-ports make-topic sh ./bin/kafka-topics.sh \
+		--list \
+		--zookeeper kafka:2181
+	docker-compose down
+
 up:
 	docker-compose up --build ; docker-compose down
 
