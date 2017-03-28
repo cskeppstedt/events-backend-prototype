@@ -41,7 +41,7 @@ services:
       - kafka
       - grafana_graphite
     volumes:
-      - ./log/riemann/riemann.log:/var/log/riemann/riemann.log
+      - ./log/riemann:/var/log/riemann
 
   producer:
     build:
