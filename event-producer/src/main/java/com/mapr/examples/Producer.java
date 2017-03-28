@@ -74,14 +74,15 @@ public class Producer {
             "\"type\":\"frontend-event\"," +
             "\"timestamp\":%d," +
             "\"name\":\"%s\"," +
-            "\"host\":\"arch-vader\"," +
-            "\"service\":\"frontend-events-producer\"," +
+            "\"host\":\"the-producer\"," +
+            "\"service\":\"frontend-events/%s\"," +
             "\"state\":\"ok\"," +
             "\"tags\":[\"frontend-events\"]," +
-            "\"session_id\":\"%s\"," +
-            "\"instance_id\":\"%s\"" +
+            "\"sid\":\"%s\"," +
+            "\"iid\":\"%s\"" +
             "}",
             System.currentTimeMillis(),
+            name,
             name,
             sessionId,
             instanceId
